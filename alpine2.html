@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://matcha.mizu.sh/matcha.css">
+</head>
+<body>
+    
+    <h1>Alpine JS Intro</h1>
+
+    <div x-data="bucket">
+        
+        <button @click="open=true" class="click">Show</button>
+        <button @click="open=false" class="click">Hide</button>
+        <button @click="open=!open" class="click">Toggle</button>
+        <p style="margin-top:50px;"></p>
+        <p x-transition x-show="open" style="width:600px; height:200px; background-color:bisque ; padding: 20px;" x-text="message"></p>
+
+        
+    </div>
+
+    <script>
+        const bucket = {
+            message: "Now that you're all set up to play around, let's look at three practical examples as a foundation for teaching you the basics of Alpine. By the end of this exercise, you should be more than equipped to start building stuff on your own. Let's goooooo.",
+            open: false
+        }
+    </script>
+</body>
+</html>

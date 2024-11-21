@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine 1</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://matcha.mizu.sh/matcha.css">
+</head>
+<body>
+    <h1>Alpine JS Intro</h1>
+    <div x-data="person">
+        <h2 x-text="name"></h2>
+        <p x-text="age"></p>
+        <p x-text="email"></p>
+
+        <!-- <button @click="age++" class="click">Click Me</button> -->
+        <button @click="addAge()" class="click">Click Me</button>
+
+        <hr>
+
+        <input type="text" x-model="age" >
+
+    </div>
+    <script>
+        const person = {
+            name: "John Doe",
+            age: 30,
+            email: "john@doe.com",
+            addAge: function() {
+                this.age++;
+            }
+        }
+    </script>
+</body>
+</html>

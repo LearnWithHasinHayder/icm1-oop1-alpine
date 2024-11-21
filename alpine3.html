@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://matcha.mizu.sh/matcha.css">
+    <style>
+        /* Center the loading SVG */
+        #loading {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Loop</h1>
+    
+
+    <div x-data="data">
+        <h2>Total Persons = <span x-text="persons.length"></span></h2>
+        <!-- loading svg -->
+        <p x-show="loading">
+            <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading" width="100">
+        </p>
+        <table x-show="!loading">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="person in persons" :key="person.email">
+                    <tr>
+                        <td x-text="person.name"></td>
+                        <td x-text="person.username"></td>
+                        <td x-text="person.email"></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+        <p style="margin-top:30px;">
+            <button @click="addPerson()">Add New Person</button>
+            <button @click="fetchNewPersons()">Fetch New </button>
+        </p>
+    </div>
+
+
+    <script>
+        const data = {
+            loading:false,
+            persons: [
+                { name: "John Doe", username: "john", email: "john@doe.com" },
+                { name: "Jane Doe", username: "jane", email: "jane@doe.com" },
+                { name: "John Smith", username: "smith", email: "john@smith.com" },
+                { name: "Jim Smith", username: "jim", email: "jim@smith.com" }
+
+            ],
+            addPerson : function() {
+                const person = {
+                    name: "New Person",
+                    username: "new",
+                    email: "new@person.com"
+                }
+                const person2 = {
+                    name: "New Person 2",
+                    username: "new2",
+                    email: "new2@person.com"
+                }
+                this.persons.push(person);
+                this.persons.push(person2);
+            },
+            fetchNewPersons: function(){
+                this.loading = true;
+
+                const apiEndpoint = 'https://jsonplaceholder.typicode.com/users';
+                fetch(apiEndpoint)
+                .then(response => response.json())
+                .then(remotedata => {
+                    this.persons = remotedata;
+                    this.loading = false;
+                })
+            }
+
+        }
+    </script>
+</body>
+
+</html>
